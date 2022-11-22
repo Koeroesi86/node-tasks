@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  webapp:
+    image: 'node:18-alpine'
+    init: true
+    command: yarn crontab-ui
+    working_dir: /data
+    labels:
+      - org.opencontainers.image.authors="koeroesi86@gmail.com"
+    volumes:
+      - ./:/data
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      # - ENABLE_AUTOSAVE=true
+      # - BASE_URL
+      # - CRON_DB_PATH=
+      # - CRON_PATH=
+      # - BASIC_AUTH_USER=
+      # - BASIC_AUTH_PWD=
+      # - SSL_CERT=
+      # - SSL_KEY=

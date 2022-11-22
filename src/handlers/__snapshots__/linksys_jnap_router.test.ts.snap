@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`callJNAPRouter calls axios 1`] = `
+{
+  "baseUrl": "http://example-router/",
+  "data": "{"example":"data"}",
+  "headers": {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "X-JNAP-Action": "http://linksys.com/jnap/example-password",
+    "X-JNAP-Authorization": "Basic ZXhhbXBsZS11c2VyOmV4YW1wbGUtcGFzc3dvcmQ=",
+    Symbol(defaults): {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  },
+  "method": "post",
+  "url": "/JNAP/",
+}
+`;
