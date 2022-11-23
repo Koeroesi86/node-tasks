@@ -2,10 +2,8 @@ version: '3.9'
 
 services:
   webapp:
-    image: 'node:18-alpine'
-    init: true
-    command: yarn crontab-ui
-    working_dir: /data
+    build: .
+    restart: always
     deploy:
       resources:
         limits:
