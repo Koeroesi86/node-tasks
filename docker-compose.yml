@@ -1,10 +1,16 @@
 version: '3.9'
+
 services:
   webapp:
     image: 'node:18-alpine'
     init: true
     command: yarn crontab-ui
     working_dir: /data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 128M
     labels:
       - org.opencontainers.image.authors="koeroesi86@gmail.com"
     volumes:
