@@ -5,14 +5,11 @@ exports[`callZTERouter calls axios 1`] = `
   "baseUrl": "http://example-router/",
   "data": "action=login&Username=example-user&Password=example-password",
   "headers": {
+    "Accept": "application/json, text/plain, */*",
     "Content-Type": "application/x-www-form-urlencoded",
     "Cookie": "_TESTCOOKIESUPPORT=1",
     "Host": "example-router",
     "Referer": "http://example-router/",
-    Symbol(defaults): {
-      "Accept": "application/json, text/plain, */*",
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
   },
   "method": "post",
   "url": "/",
@@ -24,14 +21,11 @@ exports[`callZTERouter calls axios 2`] = `
   "baseUrl": "http://example-router/",
   "data": "action=exampel-action",
   "headers": {
+    "Accept": "application/json, text/plain, */*",
     "Content-Type": "application/x-www-form-urlencoded",
     "Cookie": "_TESTCOOKIESUPPORT=1; SID=example-token",
     "Host": "example-router",
     "Referer": "http://example-router/",
-    Symbol(defaults): {
-      "Accept": "application/json, text/plain, */*",
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
   },
   "method": "post",
   "url": "/",
