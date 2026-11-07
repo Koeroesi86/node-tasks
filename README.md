@@ -31,6 +31,16 @@ The other `crontab-ui` variables (`BASE_URL`, `ENABLE_AUTOSAVE`, `SSL_CERT`, `SS
   password in the cron command line, where it is stored in the crontab-ui DB
   and visible in `ps`.
 
+### Upgrading from a root-based image
+
+The container now runs as the unprivileged `node` user (uid 1000). Named volumes
+created by earlier versions are owned by root, so fix their ownership once
+(the credentials are only needed because compose requires them):
+
+    BASIC_AUTH_USER=x BASIC_AUTH_PWD=x docker compose run --rm --no-deps --user root --entrypoint chown webapp -R 1000:1000 /etc/crontabs /var/lib/crontab-ui
+
+Then start the stack and save once in the UI to regenerate the crontab.
+
 ### Build & Test
 
 Requires Node.js 22 or newer.
