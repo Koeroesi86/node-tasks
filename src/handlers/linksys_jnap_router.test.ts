@@ -1,6 +1,6 @@
 import moxios from 'moxios';
 import { callJNAPRouter } from './linksys_jnap_router';
-import { sanitiseMoxios } from './sanitise';
+import { sanitiseMoxios } from '../test-utils/sanitise';
 
 describe('callJNAPRouter', () => {
   beforeEach(() => {

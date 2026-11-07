@@ -1,6 +1,6 @@
 import moxios from 'moxios';
 import { callZTERouter } from './zte_router';
-import { sanitiseMoxios } from './sanitise';
+import { sanitiseMoxios } from '../test-utils/sanitise';
 
 describe('callZTERouter', () => {
   beforeEach(() => {
