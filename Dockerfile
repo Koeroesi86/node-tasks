@@ -1,4 +1,4 @@
-FROM node:24-alpine
+FROM node:25-alpine
 
 ENV CRON_PATH /etc/crontabs
 ENV CRON_IN_DOCKER true
