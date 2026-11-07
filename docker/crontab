@@ -1,0 +1,12 @@
+#!/bin/sh
+# crontab-ui installs its schedule by writing $CRON_PATH/crontab and then running
+# `crontab <file>`. The system crontab needs root, so supercronic watches that
+# file instead and this shim only keeps it in sync.
+target="${CRON_PATH:-/etc/crontabs}/crontab"
+
+case "$1" in
+  -l) cat "$target" ;;
+  -) cat > "$target" ;;
+  "") echo "usage: crontab <file>|-|-l" >&2; exit 1 ;;
+  *) [ "$(realpath "$1")" = "$(realpath "$target")" ] || cp "$1" "$target" ;;
+esac
