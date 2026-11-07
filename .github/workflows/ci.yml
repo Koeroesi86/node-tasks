@@ -20,7 +20,8 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      - run: npm ci --ignore-scripts
+      - run: npm audit signatures
       - run: npx prettier --check src
       - run: npm run build
       - run: npm audit --omit=dev

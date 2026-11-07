@@ -1,0 +1,21 @@
+name: Published image rescan
+
+on:
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      # Re-scan the image that is already published, since new CVEs appear after the build-time scan.
+      - uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: koeroesi86/node-tasks:latest
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: '1'
