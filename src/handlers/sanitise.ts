@@ -10,9 +10,7 @@ interface Ret {
   data: any;
 }
 
-export const sanitiseMoxios = (
-  request: Req
-): Ret => ({
+export const sanitiseMoxios = (request: Req): Ret => ({
   baseUrl: request.config.baseURL,
   url: request.config.url,
   method: request.config.method,

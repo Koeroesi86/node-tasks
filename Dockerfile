@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:24-alpine
 
 ENV CRON_PATH /etc/crontabs
 ENV CRON_IN_DOCKER true
@@ -11,10 +11,10 @@ LABEL org.opencontainers.image.authors="koeroesi86@gmail.com"
 COPY . /data
 WORKDIR /data
 
-RUN yarn install && \
-    yarn build && \
-    yarn install --prod && \
-    yarn cache clean
+RUN npm ci && \
+    npm run build && \
+    npm prune --omit=dev && \
+    npm cache clean --force
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
