@@ -1,4 +1,4 @@
-# Koeroesi86/node-tasks [![Docker Image CI](https://github.com/Koeroesi86/node-tasks/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Koeroesi86/node-tasks/actions/workflows/docker-image.yml)
+# Koeroesi86/node-tasks [![CI](https://github.com/Koeroesi86/node-tasks/actions/workflows/ci.yml/badge.svg)](https://github.com/Koeroesi86/node-tasks/actions/workflows/ci.yml)
 
 Schedule tasks with NodeJS
 
