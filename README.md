@@ -11,4 +11,7 @@ Please enter in a console/terminal:
 
 ### Build & Test
 
-    yarn build
+Requires Node.js 22 or newer.
+
+    npm ci
+    npm run build
