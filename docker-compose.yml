@@ -12,18 +12,27 @@ services:
     labels:
       - org.opencontainers.image.authors="koeroesi86@gmail.com"
     volumes:
-      - ./:/data
+      # Persist only state; the image's own /data (dist, node_modules) stays visible.
+      - crontab-ui-db:/var/lib/crontab-ui
+      - crontabs:/etc/crontabs
     ports:
-      - '3000:3000'
+      # Bound to the host's loopback only. Put a VPN or reverse proxy in front to expose it.
+      - '127.0.0.1:3000:3000'
     environment:
       - PORT=3000
+      # Must listen on all container interfaces for the port mapping to work.
+      # Exposure is restricted by the loopback-only port binding above.
       - HOST=0.0.0.0
       - TZ=Europe/Budapest
+      - CRON_DB_PATH=/var/lib/crontab-ui
+      # crontab-ui can run arbitrary commands as root, so credentials are mandatory.
+      - BASIC_AUTH_USER=${BASIC_AUTH_USER:?Set BASIC_AUTH_USER}
+      - BASIC_AUTH_PWD=${BASIC_AUTH_PWD:?Set BASIC_AUTH_PWD}
       # - ENABLE_AUTOSAVE=true
       # - BASE_URL
-      # - CRON_DB_PATH=
-      # - CRON_PATH=
-      # - BASIC_AUTH_USER=
-      # - BASIC_AUTH_PWD=
       # - SSL_CERT=
       # - SSL_KEY=
+
+volumes:
+  crontab-ui-db:
+  crontabs:
