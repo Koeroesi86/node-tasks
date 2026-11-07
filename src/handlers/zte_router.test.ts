@@ -12,21 +12,28 @@ describe('callZTERouter', () => {
   });
 
   it('calls axios', async () => {
-    moxios.stubRequest('/', {
+    const router = 'example-router';
+
+    moxios.stubRequest('/index.gch', {
       status: 200,
       headers: { 'set-cookie': ['SID=example-token; PATH=/; HttpOnly'] },
-      response: {},
+      response: 'Login successful',
+    });
+    moxios.stubRequest(/\/getpage.gch\?.*/, {
+      status: 200,
+      headers: { 'set-cookie': ['SID=example-token; PATH=/; HttpOnly'] },
+      response: 'Login successful',
     });
 
     await callZTERouter({
-      router: 'example-router',
+      router,
       user: 'example-user',
       password: 'example-password',
-      action: 'exampel-action',
+      action: 'test',
     });
 
     expect(moxios.requests.count()).toEqual(2);
-    expect(sanitiseMoxios(moxios.requests.at(0))).toMatchSnapshot();
-    expect(sanitiseMoxios(moxios.requests.at(1))).toMatchSnapshot();
+    expect(sanitiseMoxios(moxios.requests.get('post', '/index.gch'))).toMatchSnapshot();
+    expect(sanitiseMoxios(moxios.requests.get('get', '/getpage.gch?pid=1002&nextpage=status_dev_info_t.gch'))).toMatchSnapshot();
   });
 });

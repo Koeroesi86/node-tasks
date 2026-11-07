@@ -2,32 +2,27 @@
 
 exports[`callZTERouter calls axios 1`] = `
 {
-  "baseUrl": "http://example-router/",
-  "data": "action=login&Username=example-user&Password=example-password",
+  "baseUrl": "http://example-router",
+  "data": "Username=example-user&Password=example-password&action=login",
   "headers": {
     "Accept": "application/json, text/plain, */*",
     "Content-Type": "application/x-www-form-urlencoded",
-    "Cookie": "_TESTCOOKIESUPPORT=1",
-    "Host": "example-router",
-    "Referer": "http://example-router/",
+    "Referer": "http://example-router/index.gch",
   },
   "method": "post",
-  "url": "/",
+  "url": "/index.gch",
 }
 `;
 
 exports[`callZTERouter calls axios 2`] = `
 {
-  "baseUrl": "http://example-router/",
-  "data": "action=exampel-action",
+  "baseUrl": "http://example-router",
+  "data": undefined,
   "headers": {
     "Accept": "application/json, text/plain, */*",
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Cookie": "_TESTCOOKIESUPPORT=1; SID=example-token",
-    "Host": "example-router",
-    "Referer": "http://example-router/",
+    "Cookie": "SID=example-token",
   },
-  "method": "post",
-  "url": "/",
+  "method": "get",
+  "url": "/getpage.gch?pid=1002&nextpage=status_dev_info_t.gch",
 }
 `;
