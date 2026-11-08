@@ -2,7 +2,11 @@ version: '3.9'
 
 services:
   webapp:
-    build: .
+    build:
+      context: .
+      args:
+        PUID: ${PUID:-1000}
+        PGID: ${PGID:-1000}
     restart: unless-stopped
     deploy:
       resources:
@@ -15,6 +19,10 @@ services:
       # Persist only state; the image's own /data (dist, node_modules) stays visible.
       - crontab-ui-db:/var/lib/crontab-ui
       - crontabs:/etc/crontabs
+      # ssh config, keys and known_hosts used by the ssh_backup task. Keys must be
+      # readable by PUID and the host must already be in known_hosts.
+      - ${SSH_DIR:-${HOME}/.ssh}:/home/node/.ssh:ro
+      - ssh-backups:/backups
     ports:
       # Bound to the host's loopback only. Put a VPN or reverse proxy in front to expose it.
       - '127.0.0.1:3000:3000'
@@ -24,6 +32,9 @@ services:
       # Exposure is restricted by the loopback-only port binding above.
       - HOST=0.0.0.0
       - TZ=Europe/Budapest
+      # - SSH_BACKUP_KEEP=14
+      # - SSH_BACKUP_ON_FAILURE=curl -fsS -m 10 --retry 3 https://hc-ping.com/<uuid>/fail
+      # - SSH_BACKUP_EXCLUDE=node_modules,*.log
       - CRON_DB_PATH=/var/lib/crontab-ui
       # crontab-ui can run arbitrary commands as root, so credentials are mandatory.
       - BASIC_AUTH_USER=${BASIC_AUTH_USER:?Set BASIC_AUTH_USER}
@@ -36,3 +47,4 @@ services:
 volumes:
   crontab-ui-db:
   crontabs:
+  ssh-backups:
